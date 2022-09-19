@@ -13,29 +13,12 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.Oracle12cDialect
   application:
-    name: oauth-expense-service
-#  security:
-#    oauth2:
-#      resourceserver:
-#        jwt:
-##          issuer-uri: http://localhost:8080/auth/realms/kings-realm
-#          jwk-set-uri: http://localhost:8080/realms/kings-realm/protocol/openid-connect/certs
+    name: expense-plan-reactive-service
 
 server:
   port: 9000
   servlet:
-    context-path: /expense-plan-service
-
-logging:
-  level:
-    org:
-      springframework:
-        security: debug
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8999/eureka
+    context-path: /expense-plan-reactive-service
 
 
 

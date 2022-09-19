@@ -5,6 +5,8 @@ import com.konvergion.personalfinance.expenseplansapi.service.IExpensePlanServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -15,26 +17,14 @@ public class ExpensePlanController {
     @Autowired
     private IExpensePlanService expensePlanService;
 
-    @PostMapping("/expense-plan-item")
-    public ResponseEntity<String> addExpensePlan(@RequestBody ExpensePlanItemDTO itemDTO){
-        expensePlanService.addExpensePlan(itemDTO);
-        return ResponseEntity.ok("An expense plan was added");
-    }
-
-    @GetMapping("/expense-plan-item/{expensePlanItemId}")
-    public ResponseEntity<ExpensePlanItemDTO> getExpensePlanItem(
+    @GetMapping("/expense-plan-items/{expensePlanItemId}")
+    public Mono<ExpensePlanItemDTO> getExpensePlanItem(
             @PathVariable("expensePlanItemId") String expensePlanItemId){
-        return ResponseEntity.ok(expensePlanService.getSingleExpensePlanItem(expensePlanItemId));
+        return Mono.just(expensePlanService.getSingleExpensePlanItem(expensePlanItemId));
     }
 
-    @GetMapping("/expense-plan-item")
-    public ResponseEntity<List<ExpensePlanItemDTO>> getAllExpensePlanItems(){
-        return ResponseEntity.ok(expensePlanService.getAllExpensePlanItems());
-    }
-
-    @DeleteMapping("/expense-plan-item/{planItemId}")
-    public ResponseEntity<String> removeExpensePlan(@PathVariable String planItemId){
-        expensePlanService.deleteExpensePlanItem(planItemId);
-        return ResponseEntity.ok(String.format("The expense plan item with id %s has been deleted", planItemId));
+    @GetMapping("/expense-plan-items")
+    public Flux<ExpensePlanItemDTO> getAllExpensePlanItems() {
+        return Flux.fromIterable(expensePlanService.getAllExpensePlanItems());
     }
 }

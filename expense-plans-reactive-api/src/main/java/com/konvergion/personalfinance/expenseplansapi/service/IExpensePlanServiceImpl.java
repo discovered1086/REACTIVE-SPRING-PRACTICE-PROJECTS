@@ -6,8 +6,8 @@ import com.konvergion.personalfinance.expenseplansapi.model.dto.ExpensePlanItemD
 import com.konvergion.personalfinance.expenseplansapi.model.entities.ExpensePlanItemEntity;
 import com.konvergion.personalfinance.expenseplansapi.model.repository.ExpensePlanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.AuthorizationServiceException;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,18 +23,6 @@ public class IExpensePlanServiceImpl implements IExpensePlanService {
     @Autowired
     public IExpensePlanServiceImpl(ExpensePlanRepository expensePlanRepository) {
         this.expensePlanRepository = expensePlanRepository;
-    }
-
-    @Override
-    public ExpensePlanItemDTO addExpensePlan(ExpensePlanItemDTO expensePlanItemDTO) {
-        final ExpensePlanItemEntity expensePlanItemEntity = expensePlanBeanMapper.convertDtoToEntity(expensePlanItemDTO);
-        expensePlanRepository.save(expensePlanItemEntity);
-        return expensePlanBeanMapper.convertEntityToDto(expensePlanItemEntity);
-    }
-
-    @Override
-    public void deleteExpensePlanItem(String itemId) {
-        expensePlanRepository.deleteById(itemId);
     }
 
     @Override

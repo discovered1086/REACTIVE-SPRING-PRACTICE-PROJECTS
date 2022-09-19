@@ -10,9 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -24,16 +21,13 @@ public class ExpensePlanItemDTO {
 
     private String itemId;
 
-    @NotNull(message = "The item description can't be empty")
     private String itemDescription;
 
     private String itemLinkUrl;
 
-    @Max(value = 5, message = "The itemPriority can't be greater than 5")
-    @Min(value = 1, message = "The itemPriority can't be less than 1")
     private int itemPriority;
 
-    @NotNull(message = "Item category can't be blank")
+
     private String itemCategory;
 
     @JsonDeserialize(using = DateDeSerializer.class)
