@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -17,7 +19,11 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor // Required for JPA
 @AllArgsConstructor
-public class ExpensePlanItemDTO {
+@Document
+public class ExpensePlanItemDocument {
+
+    @Id
+    private String id;
 
     private String itemId;
 
@@ -27,16 +33,7 @@ public class ExpensePlanItemDTO {
 
     private int itemPriority;
 
-
     private String itemCategory;
-
-    @JsonDeserialize(using = DateDeSerializer.class)
-    @JsonSerialize(using = DateSerializer.class)
-    private LocalDate targetExpenseDate;
-
-    @JsonSerialize(using = DateSerializer.class)
-    @JsonDeserialize(using = DateDeSerializer.class)
-    private LocalDate actualPurchaseDate;
 
     private BigDecimal estimatedAmount;
 
@@ -45,6 +42,4 @@ public class ExpensePlanItemDTO {
     private String currencyCode;
 
     private int expenseStatus;
-
-    private String createdBy;
 }

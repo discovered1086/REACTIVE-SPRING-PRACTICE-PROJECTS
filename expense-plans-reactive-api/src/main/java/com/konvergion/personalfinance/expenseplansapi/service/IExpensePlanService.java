@@ -2,14 +2,13 @@ package com.konvergion.personalfinance.expenseplansapi.service;
 
 
 
-import com.konvergion.personalfinance.expenseplansapi.model.dto.ExpensePlanItemDTO;
+import com.konvergion.personalfinance.expenseplansapi.model.dto.ExpensePlanItemDocument;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.List;
 
 public interface IExpensePlanService {
 	
-	List<ExpensePlanItemDTO> getAllExpensePlanItems();
+	Flux<ExpensePlanItemDocument> getAllExpensePlanItems();
 	
-	ExpensePlanItemDTO getSingleExpensePlanItem(String planItemId);
+	Mono<ExpensePlanItemDocument> getSingleExpensePlanItem(String planItemId);
 }

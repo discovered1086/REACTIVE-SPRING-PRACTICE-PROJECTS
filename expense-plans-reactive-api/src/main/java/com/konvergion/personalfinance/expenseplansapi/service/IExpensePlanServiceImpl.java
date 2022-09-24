@@ -1,16 +1,12 @@
 package com.konvergion.personalfinance.expenseplansapi.service;
 
 
-import com.konvergion.personalfinance.expenseplansapi.model.beanmapping.ExpensePlanBeanMapper;
-import com.konvergion.personalfinance.expenseplansapi.model.dto.ExpensePlanItemDTO;
-import com.konvergion.personalfinance.expenseplansapi.model.entities.ExpensePlanItemEntity;
+import com.konvergion.personalfinance.expenseplansapi.model.dto.ExpensePlanItemDocument;
 import com.konvergion.personalfinance.expenseplansapi.model.repository.ExpensePlanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class IExpensePlanServiceImpl implements IExpensePlanService {
@@ -18,24 +14,17 @@ public class IExpensePlanServiceImpl implements IExpensePlanService {
     private final ExpensePlanRepository expensePlanRepository;
 
     @Autowired
-    private ExpensePlanBeanMapper expensePlanBeanMapper;
-
-    @Autowired
     public IExpensePlanServiceImpl(ExpensePlanRepository expensePlanRepository) {
         this.expensePlanRepository = expensePlanRepository;
     }
 
     @Override
-    public List<ExpensePlanItemDTO> getAllExpensePlanItems() {
-        final var allExpensePlanItems = expensePlanRepository.findAll();
-        return allExpensePlanItems.stream().map(expensePlanBeanMapper::convertEntityToDto)
-                .collect(Collectors.toList());
+    public Flux<ExpensePlanItemDocument> getAllExpensePlanItems() {
+       return expensePlanRepository.findAll();
     }
 
     @Override
-    public ExpensePlanItemDTO getSingleExpensePlanItem(String planItemId) {
-        return expensePlanRepository.findById(planItemId)
-                .map(expensePlanBeanMapper::convertEntityToDto)
-                .orElse(new ExpensePlanItemDTO());
+    public Mono<ExpensePlanItemDocument> getSingleExpensePlanItem(String planItemId) {
+        return expensePlanRepository.findById(planItemId);
     }
 }

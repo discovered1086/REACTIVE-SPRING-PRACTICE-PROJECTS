@@ -1,10 +1,9 @@
 package com.konvergion.personalfinance.expenseplansapi.model.repository;
 
 
+import com.konvergion.personalfinance.expenseplansapi.model.dto.ExpensePlanItemDocument;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
-import com.konvergion.personalfinance.expenseplansapi.model.entities.ExpensePlanItemEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface ExpensePlanRepository extends JpaRepository<ExpensePlanItemEntity, String> {
+public interface ExpensePlanRepository extends ReactiveMongoRepository<ExpensePlanItemDocument, String> {
 
 }
