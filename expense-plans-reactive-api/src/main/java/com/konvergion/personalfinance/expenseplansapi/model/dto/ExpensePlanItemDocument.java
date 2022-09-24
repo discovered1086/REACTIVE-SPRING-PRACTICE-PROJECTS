@@ -19,7 +19,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor // Required for JPA
 @AllArgsConstructor
-@Document
+@Document(collection = "expenseplans")
 public class ExpensePlanItemDocument {
 
     @Id

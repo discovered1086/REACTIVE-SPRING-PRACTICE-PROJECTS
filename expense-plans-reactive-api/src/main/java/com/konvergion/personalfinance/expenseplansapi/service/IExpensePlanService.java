@@ -11,4 +11,6 @@ public interface IExpensePlanService {
 	Flux<ExpensePlanItemDocument> getAllExpensePlanItems();
 	
 	Mono<ExpensePlanItemDocument> getSingleExpensePlanItem(String planItemId);
+
+	Mono<ExpensePlanItemDocument> addExpensePlan(ExpensePlanItemDocument document);
 }

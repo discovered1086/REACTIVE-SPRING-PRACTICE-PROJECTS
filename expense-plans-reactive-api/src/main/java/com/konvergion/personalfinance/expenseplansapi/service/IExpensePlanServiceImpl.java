@@ -27,4 +27,9 @@ public class IExpensePlanServiceImpl implements IExpensePlanService {
     public Mono<ExpensePlanItemDocument> getSingleExpensePlanItem(String planItemId) {
         return expensePlanRepository.findById(planItemId);
     }
+
+    @Override
+    public Mono<ExpensePlanItemDocument> addExpensePlan(ExpensePlanItemDocument document) {
+        return expensePlanRepository.save(document);
+    }
 }
